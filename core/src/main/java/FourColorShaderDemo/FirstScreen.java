@@ -50,7 +50,7 @@ public class FirstScreen implements Screen {
                         "varying vec2 v_texCoords;\n\n" +
                         "void main() {\n" +
                         "    v_color = a_color;\n" +
-                        "    v_color.a = v_color.a * 1.0039216; //* (256.0/255.0)\n" +
+                        "    v_color.a = v_color.a * (256f / 255f); //*\n" +
                         "    v_texCoords = a_texCoord0;\n" +
                         "    gl_Position = u_projTrans * a_position;\n" +
                         "}"
