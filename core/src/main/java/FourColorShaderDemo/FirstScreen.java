@@ -72,6 +72,8 @@ public class FirstScreen implements Screen {
 
         if (!shader.isCompiled()) throw new GdxRuntimeException("Couldn't compile shader: " + shader.getLog());
 
+        shader.begin();
+
         int location = shader.getUniformLocation("u_palette[0]");
         Gdx.app.debug("location", Integer.toString(location));
         for (int x = 0; x < palette.length; x++)
