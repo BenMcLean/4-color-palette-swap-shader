@@ -107,9 +107,6 @@ public class FirstScreen implements Screen {
         batch.setProjectionMatrix(worldView.getCamera().combined);
 
         batch.setShader(shader);
-        atlas.getTextures().first().bind(0);
-        shader.setUniformi("u_texture", 0);
-        Gdx.gl.glActiveTexture(GL20.GL_TEXTURE0);
 
         batch.begin();
         batch.draw(test, 0, 0);
