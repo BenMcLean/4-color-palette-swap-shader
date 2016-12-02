@@ -42,8 +42,7 @@ public class FirstScreen implements Screen {
         palette[3] = new Color(15 / 255f, 56 / 255f, 15 / 255f, 255 / 255f);
 
         shader = new ShaderProgram(
-                "#version 120\n" +
-                        "attribute vec4 a_position;\n" +
+                "attribute vec4 a_position;\n" +
                         "attribute vec4 a_color;\n" +
                         "attribute vec2 a_texCoord0;\n" +
                         "uniform mat4 u_projTrans;\n" +
@@ -56,8 +55,7 @@ public class FirstScreen implements Screen {
                         "    gl_Position = u_projTrans * a_position;\n" +
                         "}"
                 ,
-                "#version 120\n" +
-                        "#ifdef GL_ES\n" +
+                "#ifdef GL_ES\n" +
                         "#define LOWP lowp\n" +
                         "precision mediump float;\n" +
                         "#else\n" +
