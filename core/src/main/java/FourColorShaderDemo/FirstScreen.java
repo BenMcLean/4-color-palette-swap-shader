@@ -35,12 +35,6 @@ public class FirstScreen implements Screen {
 
     @Override
     public void show() {
-        palette = new Color[4];
-        palette[0] = new Color(156 / 255f, 189 / 255f, 15 / 255f, 255 / 255f);
-        palette[1] = new Color(140 / 255f, 173 / 255f, 15 / 255f, 0 / 255f);
-        palette[2] = new Color(48 / 255f, 98 / 255f, 48 / 255f, 255 / 255f);
-        palette[3] = new Color(15 / 255f, 56 / 255f, 15 / 255f, 255 / 255f);
-
         shader = new ShaderProgram(
                 "attribute vec4 a_position;\n" +
                         "attribute vec4 a_color;\n" +
@@ -69,23 +63,24 @@ public class FirstScreen implements Screen {
                         "    gl_FragColor = u_palette[int(texture2D(u_texture, v_texCoords).r * 3.9999)];\n" +
                         "}"
         );
-
         if (!shader.isCompiled()) throw new GdxRuntimeException("Couldn't compile shader: " + shader.getLog());
 
-        shader.begin();
+        palette = new Color[4];
+        palette[0] = new Color(156 / 255f, 189 / 255f, 15 / 255f, 255 / 255f);
+        palette[1] = new Color(140 / 255f, 173 / 255f, 15 / 255f, 0 / 255f);
+        palette[2] = new Color(48 / 255f, 98 / 255f, 48 / 255f, 255 / 255f);
+        palette[3] = new Color(15 / 255f, 56 / 255f, 15 / 255f, 255 / 255f);
 
+        shader.begin();
         int location = shader.getUniformLocation("u_palette[0]");
-        Gdx.app.debug("location", Integer.toString(location));
         for (int x = 0; x < palette.length; x++)
             shader.setUniformf(location + x, palette[x]);
 
         atlas = new TextureAtlas("art.atlas");
         test = atlas.findRegion("test");
 
-        frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, VIRTUAL_WIDTH, VIRTUAL_HEIGHT, true, true);
-
         worldBackgroundColor = Color.PURPLE;
-        screenBackgroundColor = Color.PURPLE;
+        screenBackgroundColor = Color.BLACK;
         batch = new SpriteBatch();
         frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, VIRTUAL_WIDTH, VIRTUAL_HEIGHT, true, true);
         worldView = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
@@ -104,9 +99,7 @@ public class FirstScreen implements Screen {
         worldView.getCamera().position.set(playerX, playerY, 0);
         worldView.update(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
         batch.setProjectionMatrix(worldView.getCamera().combined);
-
         batch.setShader(shader);
-
         batch.begin();
         batch.draw(test, 0, 0);
         batch.end();
@@ -115,7 +108,6 @@ public class FirstScreen implements Screen {
 
         Gdx.gl.glClearColor(screenBackgroundColor.r, screenBackgroundColor.g, screenBackgroundColor.b, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         screenView.apply();
         batch.setProjectionMatrix(screenView.getCamera().combined);
         batch.begin();
