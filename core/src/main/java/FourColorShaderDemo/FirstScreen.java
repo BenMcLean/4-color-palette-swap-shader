@@ -92,7 +92,6 @@ public class FirstScreen implements Screen {
         screenView = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
         screenRegion = new TextureRegion();
         screenView.getCamera().position.set(VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2, 0);
-        screenView.update(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
         batch.enableBlending();
     }
 
@@ -135,7 +134,6 @@ public class FirstScreen implements Screen {
 
     @Override
     public void pause() {
-
     }
 
     @Override
