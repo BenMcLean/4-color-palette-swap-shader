@@ -37,7 +37,7 @@ public class FirstScreen implements Screen {
     public void show() {
         palette = new Color[4];
         palette[0] = new Color(156 / 255f, 189 / 255f, 15 / 255f, 255 / 255f);
-        palette[1] = new Color(140 / 255f, 173 / 255f, 15 / 255f, 255 / 255f);
+        palette[1] = new Color(140 / 255f, 173 / 255f, 15 / 255f, 0 / 255f);
         palette[2] = new Color(48 / 255f, 98 / 255f, 48 / 255f, 255 / 255f);
         palette[3] = new Color(15 / 255f, 56 / 255f, 15 / 255f, 255 / 255f);
 
@@ -50,7 +50,7 @@ public class FirstScreen implements Screen {
                         "varying vec2 v_texCoords;\n\n" +
                         "void main() {\n" +
                         "    v_color = a_color;\n" +
-                        "    v_color.a = v_color.a * (256f / 255f); //*\n" +
+                        "    v_color.a = v_color.a * (256f / 255f);\n" +
                         "    v_texCoords = a_texCoord0;\n" +
                         "    gl_Position = u_projTrans * a_position;\n" +
                         "}"
