@@ -102,12 +102,17 @@ public class FirstScreen implements Screen {
         worldView.update(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
         batch.setProjectionMatrix(worldView.getCamera().combined);
         batch.setShader(shader);
+
         batch.begin();
         applyPalette(palette);
         batch.draw(test, -16, 0);
+        batch.end();
+
+        batch.begin();
         applyPalette(gameboy);
         batch.draw(test, 0, 0);
         batch.end();
+
         batch.setShader(null);
         frameBuffer.end();
 
