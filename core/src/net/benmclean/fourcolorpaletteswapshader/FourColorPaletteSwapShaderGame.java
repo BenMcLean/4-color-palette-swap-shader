@@ -9,8 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder;
-import com.badlogic.gdx.graphics.g3d.utils.TextureBinder;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -37,7 +35,6 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
 	private Viewport screenView;
 	private Texture screenTexture;
 	private TextureRegion screenRegion;
-	private TextureBinder binder;
 
 	@Override
 	public void create() {
@@ -108,7 +105,6 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
 		screenView = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
 		screenRegion = new TextureRegion();
 		screenView.getCamera().position.set(VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2, 0);
-		binder = new DefaultTextureBinder(DefaultTextureBinder.WEIGHTED);
 		batch.enableBlending();
 	}
 
@@ -122,20 +118,23 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
 		worldView.update(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
 		batch.setProjectionMatrix(worldView.getCamera().combined);
 		batch.setShader(shader);
-		binder.begin();
 
 		batch.begin();
-		shader.setUniformi("u_texPalette", binder.bind(paletteTexture));
+		Gdx.gl20.glActiveTexture(GL20.GL_TEXTURE1);
+		paletteTexture.bind();
+		shader.setUniformi("u_texPalette", 1);
+		Gdx.gl20.glActiveTexture(GL20.GL_TEXTURE0);
 		batch.draw(test, -16, 0);
 		batch.end();
 
 		batch.begin();
-		gameboyTexture.bind(2);
-		shader.setUniformi("u_texPalette", binder.bind(gameboyTexture));
+		Gdx.gl20.glActiveTexture(GL20.GL_TEXTURE1);
+		gameboyTexture.bind();
+		shader.setUniformi("u_texPalette", 1);
+		Gdx.gl20.glActiveTexture(GL20.GL_TEXTURE0);
 		batch.draw(test, 0, 0);
 		batch.end();
 
-		binder.end();
 		batch.setShader(null);
 		frameBuffer.end();
 
