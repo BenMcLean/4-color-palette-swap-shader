@@ -1,12 +1,11 @@
 package net.benmclean.fourcolorpaletteswapshader.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame;
 
+/** Launches the desktop (LWJGL) application. */
 public class DesktopLauncher {
-	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new FourColorPaletteSwapShaderGame(), config);
-	}
+    public static void main(String[] args) {
+        new LwjglApplication(new FourColorPaletteSwapShaderGame());
+    }
 }
