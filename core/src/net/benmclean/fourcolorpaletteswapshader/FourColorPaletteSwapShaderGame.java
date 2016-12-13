@@ -36,6 +36,8 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
 
     @Override
     public void create() {
+        // vertexShader copied from https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g2d/SpriteBatch.java#L132
+        // fragmentShader is where the magic happens
         shader = new ShaderProgram(
                 "attribute vec4 " + ShaderProgram.POSITION_ATTRIBUTE + ";\n" //
                         + "attribute vec4 " + ShaderProgram.COLOR_ATTRIBUTE + ";\n" //
