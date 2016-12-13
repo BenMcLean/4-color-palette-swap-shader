@@ -26,6 +26,8 @@ public class FirstScreen implements Screen {
     public TextureAtlas.AtlasRegion test;
     public Color[] palette;
     public Color[] gameboy;
+    public Texture paletteTexture;
+    public Texture gameboyTexture;
     public ShaderProgram shader;
     private FrameBuffer frameBuffer;
     private SpriteBatch batch;
@@ -66,17 +68,30 @@ public class FirstScreen implements Screen {
         );
         if (!shader.isCompiled()) throw new GdxRuntimeException("Couldn't compile shader: " + shader.getLog());
 
+        Pixmap pixmap = new Pixmap(4, 1, Pixmap.Format.RGBA8888);
+
         palette = new Color[4];
-        palette[0] = new Color(0 / 255f, 0 / 255f, 0/ 255f, 255 / 255f);
+        palette[0] = new Color(0 / 255f, 0 / 255f, 0 / 255f, 255 / 255f);
         palette[1] = new Color(85 / 255f, 85 / 255f, 85 / 255f, 255 / 255f);
         palette[2] = new Color(170 / 255f, 170 / 255f, 170 / 255f, 255 / 255f);
         palette[3] = new Color(255 / 255f, 255 / 255f, 255 / 255f, 255 / 255f);
+
+        for (int x = 0; x < palette.length; x++) {
+            pixmap.setColor(palette[x]);
+            pixmap.drawPixel(x, 0);
+        }
+        paletteTexture = new Texture(pixmap);
 
         gameboy = new Color[4];
         gameboy[0] = new Color(15 / 255f, 56 / 255f, 15 / 255f, 255 / 255f);
         gameboy[1] = new Color(48 / 255f, 98 / 255f, 48 / 255f, 255 / 255f);
         gameboy[2] = new Color(140 / 255f, 173 / 255f, 15 / 255f, 255 / 255f);
         gameboy[3] = new Color(156 / 255f, 189 / 255f, 15 / 255f, 255 / 255f);
+        for (int x = 0; x < gameboy.length; x++) {
+            pixmap.setColor(gameboy[x]);
+            pixmap.drawPixel(x, 0);
+        }
+        gameboyTexture = new Texture(pixmap);
 
         atlas = new TextureAtlas("art.atlas");
         test = atlas.findRegion("test");
@@ -101,15 +116,15 @@ public class FirstScreen implements Screen {
         worldView.getCamera().position.set(playerX, playerY, 0);
         worldView.update(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
         batch.setProjectionMatrix(worldView.getCamera().combined);
-        batch.setShader(shader);
+        //batch.setShader(shader);
 
         batch.begin();
-        applyPalette(palette);
+        //shader.setUniform("u_palette", paletteTexture);
         batch.draw(test, -16, 0);
         batch.end();
 
         batch.begin();
-        applyPalette(gameboy);
+        //applyPalette(gameboy);
         batch.draw(test, 0, 0);
         batch.end();
 
@@ -151,7 +166,7 @@ public class FirstScreen implements Screen {
         atlas.dispose();
     }
 
-    public void applyPalette (Color[] palette) {
+    public void applyPalette(Color[] palette) {
         int location = shader.getUniformLocation("u_palette[0]");
         for (int x = 0; x < palette.length; x++)
             shader.setUniformf(location + x, palette[x]);
