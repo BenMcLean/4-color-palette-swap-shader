@@ -18,11 +18,12 @@ allprojects {
     version = '1.0'
     ext {
         appName = "4-color-palette-swap-shader"
-        gdxVersion = '1.9.5'
+        gdxVersion = '1.9.4'
         roboVMVersion = '2.3.0'
         box2DLightsVersion = '1.4'
         ashleyVersion = '1.7.0'
         aiVersion = '1.8.0'
+        gdxUtilsVersion = '0.13.3'
     }
 
     repositories {
@@ -71,9 +72,8 @@ project(":html") {
         compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
         compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils:0.13.3:sources"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:0.13.3:sources"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils:0.13.3:sources"
+        compile "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion:sources"
+        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion:sources"
     }
 }
 
@@ -83,8 +83,8 @@ project(":core") {
 
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:0.13.3"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils:0.13.3"
+        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion"
+        compile "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
     }
 }
 
