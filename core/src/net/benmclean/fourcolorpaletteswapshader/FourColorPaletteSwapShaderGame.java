@@ -24,10 +24,8 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
 	private Color screenBackgroundColor;
 	public TextureAtlas atlas;
 	public TextureAtlas.AtlasRegion test;
-	public Color[] palette;
-	public Color[] gameboy;
-	public Texture paletteTexture;
-	public Texture gameboyTexture;
+	public Texture greyPalette;
+	public Texture gameboyPalette;
 	public ShaderProgram shader;
 	private FrameBuffer frameBuffer;
 	private SpriteBatch batch;
@@ -71,29 +69,27 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
 
 		Pixmap pixmap = new Pixmap(4, 1, Pixmap.Format.RGBA8888);
 
-		palette = new Color[4];
-		palette[0] = new Color(0 / 255f, 0 / 255f, 0 / 255f, 255 / 255f);
-		palette[1] = new Color(0 / 255f, 0 / 255f, 0 / 255f, 170 / 255f);
-		palette[2] = new Color(0 / 255f, 0 / 255f, 0 / 255f, 85 / 255f);
-		palette[3] = new Color(0 / 255f, 0 / 255f, 0 / 255f, 0 / 255f);
+		pixmap.setColor(0 / 255f, 0 / 255f, 0 / 255f, 255 / 255f);
+		pixmap.drawPixel(0, 0);
+		pixmap.setColor(0 / 255f, 0 / 255f, 0 / 255f, 170 / 255f);
+		pixmap.drawPixel(1, 0);
+		pixmap.setColor(0 / 255f, 0 / 255f, 0 / 255f, 85 / 255f);
+		pixmap.drawPixel(2, 0);
+		pixmap.setColor(0 / 255f, 0 / 255f, 0 / 255f, 0 / 255f);
+		pixmap.drawPixel(3, 0);
+		greyPalette = new Texture(pixmap);
+		
+		pixmap.setColor(15 / 255f, 56 / 255f, 15 / 255f, 255 / 255f);
+		pixmap.drawPixel(0, 0);
+		pixmap.setColor(48 / 255f, 98 / 255f, 48 / 255f, 255 / 255f);
+		pixmap.drawPixel(1, 0);
+		pixmap.setColor(140 / 255f, 173 / 255f, 15 / 255f, 255 / 255f);
+		pixmap.drawPixel(2, 0);
+		pixmap.setColor(156 / 255f, 189 / 255f, 15 / 255f, 255 / 255f);
+		pixmap.drawPixel(3, 0);
+		gameboyPalette = new Texture(pixmap);
 
-		for (int x = 0; x < palette.length; x++) {
-			pixmap.setColor(palette[x]);
-			pixmap.drawPixel(x, 0);
-		}
-		paletteTexture = new Texture(pixmap);
-
-		gameboy = new Color[4];
-		gameboy[0] = new Color(15 / 255f, 56 / 255f, 15 / 255f, 255 / 255f);
-		gameboy[1] = new Color(48 / 255f, 98 / 255f, 48 / 255f, 255 / 255f);
-		gameboy[2] = new Color(140 / 255f, 173 / 255f, 15 / 255f, 255 / 255f);
-		gameboy[3] = new Color(156 / 255f, 189 / 255f, 15 / 255f, 255 / 255f);
-		for (int x = 0; x < gameboy.length; x++) {
-			pixmap.setColor(gameboy[x]);
-			pixmap.drawPixel(x, 0);
-		}
-		gameboyTexture = new Texture(pixmap);
-
+		pixmap.dispose();
 		atlas = new TextureAtlas("art.atlas");
 		test = atlas.findRegion("test");
 
@@ -120,14 +116,14 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
 		batch.setShader(shader);
 
 		batch.begin();
-		paletteTexture.bind(1);
+		greyPalette.bind(1);
 		shader.setUniformi("u_texPalette", 1);
 		Gdx.gl20.glActiveTexture(GL20.GL_TEXTURE0); // reset to texture 0 for SpriteBatch
 		batch.draw(test, -16, 0);
 		batch.end();
 
 		batch.begin();
-		gameboyTexture.bind(1);
+		gameboyPalette.bind(1);
 		shader.setUniformi("u_texPalette", 1);
 		Gdx.gl20.glActiveTexture(GL20.GL_TEXTURE0); // reset to texture 0 for SpriteBatch
 		batch.draw(test, 0, 0);
