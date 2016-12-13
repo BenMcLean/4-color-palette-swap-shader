@@ -93,6 +93,7 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
         gameboyPalette = new Texture(pixmap);
 
         pixmap.dispose();
+
         atlas = new TextureAtlas("art.atlas");
         test = atlas.findRegion("test");
 
