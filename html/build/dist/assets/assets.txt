@@ -1,5 +1,5 @@
 d:assets:0:application/unknown
-t:art.atlas:164:application/unknown
+t:art.atlas:177:application/unknown
 i:art.png:185:image/png
 i:badlogic.jpg:68465:image/jpeg
 t:com/badlogic/gdx/graphics/g3d/particles/particles.fragment.glsl:770:application/unknown
