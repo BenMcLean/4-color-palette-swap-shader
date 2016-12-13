@@ -117,15 +117,19 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
 		worldView.getCamera().position.set(playerX, playerY, 0);
 		worldView.update(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
 		batch.setProjectionMatrix(worldView.getCamera().combined);
-		//batch.setShader(shader);
+		batch.setShader(shader);
 
 		batch.begin();
-		//shader.setUniform("u_palette", paletteTexture);
+		Gdx.gl20.glActiveTexture(GL20.GL_TEXTURE1);
+		paletteTexture.bind();
+		shader.setUniformi("u_texPalette", 1);
 		batch.draw(test, -16, 0);
 		batch.end();
 
 		batch.begin();
-		//applyPalette(gameboy);
+		Gdx.gl20.glActiveTexture(GL20.GL_TEXTURE1);
+		gameboyTexture.bind();
+		shader.setUniformi("u_texPalette", 1);
 		batch.draw(test, 0, 0);
 		batch.end();
 
