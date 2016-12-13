@@ -64,7 +64,7 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
 						"uniform sampler2D u_texture;\n\n" +
 						"void main() {\n" +
 						"	vec4 color = texture2D(u_texture, v_texCoords);\n" +
-						"	gl_FragColor = vec4(texture2D(u_texPalette, vec2(color.r, v_color.r)).rgba);\n" +
+						"	gl_FragColor = texture2D(u_texPalette, vec2(color.r, v_color.r)).rgba;\n" +
 						"}"
 		);
 		if (!shader.isCompiled()) throw new GdxRuntimeException("Couldn't compile shader: " + shader.getLog());
