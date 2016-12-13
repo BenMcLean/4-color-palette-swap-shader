@@ -69,7 +69,7 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
 		);
 		if (!shader.isCompiled()) throw new GdxRuntimeException("Couldn't compile shader: " + shader.getLog());
 
-		Pixmap pixmap = new Pixmap(4, 1, Pixmap.Format.RGBA8888);
+		Pixmap pixmap = new Pixmap(4, 1, Pixmap.Format.RGBA4444);
 
 		palette = new Color[4];
 		palette[0] = new Color(0 / 255f, 0 / 255f, 0 / 255f, 255 / 255f);
@@ -100,7 +100,7 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
 		worldBackgroundColor = Color.PURPLE;
 		screenBackgroundColor = Color.BLACK;
 		batch = new SpriteBatch();
-		frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, VIRTUAL_WIDTH, VIRTUAL_HEIGHT, true, true);
+		frameBuffer = new FrameBuffer(Pixmap.Format.RGBA4444, VIRTUAL_WIDTH, VIRTUAL_HEIGHT, true, true);
 		worldView = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
 		screenView = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
 		screenRegion = new TextureRegion();
