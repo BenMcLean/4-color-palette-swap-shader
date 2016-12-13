@@ -100,7 +100,7 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
 		worldBackgroundColor = Color.PURPLE;
 		screenBackgroundColor = Color.BLACK;
 		batch = new SpriteBatch();
-		frameBuffer = new FrameBuffer(Pixmap.Format.RGBA4444, VIRTUAL_WIDTH, VIRTUAL_HEIGHT, true, true);
+		frameBuffer = new FrameBuffer(Pixmap.Format.RGBA4444, VIRTUAL_WIDTH, VIRTUAL_HEIGHT, false, false);
 		worldView = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
 		screenView = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
 		screenRegion = new TextureRegion();
