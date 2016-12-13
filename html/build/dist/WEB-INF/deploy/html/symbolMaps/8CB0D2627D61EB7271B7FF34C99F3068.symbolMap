@@ -1,5 +1,5 @@
-# { 1 }
-# { 'user.agent' : 'ie10' }
+# { 2 }
+# { 'user.agent' : 'ie9' }
 # jsName, jsniIdent, className, memberName, sourceUri, sourceLine, fragmentNumber
 K,,com.badlogic.gdx.ApplicationAdapter,,com/badlogic/gdx/ApplicationAdapter.java,21,-1
 R,,com.badlogic.gdx.Files$FileType,,com/badlogic/gdx/Files.java,29,-1
@@ -6349,7 +6349,7 @@ b,com.google.gwt.user.client.ui.WidgetCollection$WidgetIterator::index,com.googl
 $Tb,com.google.gwt.user.client.ui.WidgetCollection$WidgetIterator::next()Ljava/lang/Object;,com.google.gwt.user.client.ui.WidgetCollection$WidgetIterator,next,com/google/gwt/user/client/ui/WidgetCollection.java,47,0
 c,com.google.gwt.user.client.ui.WidgetCollection$WidgetIterator::this$0,com.google.gwt.user.client.ui.WidgetCollection$WidgetIterator,this$0,com/google/gwt/user/client/ui/WidgetCollection.java,36,-1
 _Tb,com.google.gwt.user.client.ui.impl.TextBoxImpl::$setSelectionRange(Lcom/google/gwt/user/client/ui/impl/TextBoxImpl;Lcom/google/gwt/dom/client/Element;II)V,com.google.gwt.user.client.ui.impl.TextBoxImpl,$setSelectionRange,com/google/gwt/user/client/ui/impl/TextBoxImpl.java,51,0
-aUb,com.google.gwt.useragent.client.UserAgentImplIe10::$getRuntimeValue(Lcom/google/gwt/useragent/client/UserAgentImplIe10;)Ljava/lang/String;,com.google.gwt.useragent.client.UserAgentImplIe10,$getRuntimeValue,gen/com/google/gwt/useragent/client/UserAgentImplIe10.java,5,0
+aUb,com.google.gwt.useragent.client.UserAgentImplIe9::$getRuntimeValue(Lcom/google/gwt/useragent/client/UserAgentImplIe9;)Ljava/lang/String;,com.google.gwt.useragent.client.UserAgentImplIe9,$getRuntimeValue,gen/com/google/gwt/useragent/client/UserAgentImplIe9.java,5,0
 bUb,com.google.gwt.webgl.client.WebGLRenderingContext::$activeTexture(Lcom/google/gwt/webgl/client/WebGLRenderingContext;I)V,com.google.gwt.webgl.client.WebGLRenderingContext,$activeTexture,com/google/gwt/webgl/client/WebGLRenderingContext.java,513,0
 cUb,com.google.gwt.webgl.client.WebGLRenderingContext::$attachShader(Lcom/google/gwt/webgl/client/WebGLRenderingContext;Lcom/google/gwt/webgl/client/WebGLProgram;Lcom/google/gwt/webgl/client/WebGLShader;)V,com.google.gwt.webgl.client.WebGLRenderingContext,$attachShader,com/google/gwt/webgl/client/WebGLRenderingContext.java,517,0
 dUb,com.google.gwt.webgl.client.WebGLRenderingContext::$bindBuffer(Lcom/google/gwt/webgl/client/WebGLRenderingContext;ILcom/google/gwt/webgl/client/WebGLBuffer;)V,com.google.gwt.webgl.client.WebGLRenderingContext,$bindBuffer,com/google/gwt/webgl/client/WebGLRenderingContext.java,525,0
@@ -6956,8 +6956,8 @@ y0b,java.util.regex.Pattern::Pattern(Ljava/lang/String;)V,java.util.regex.Patter
 a,java.util.regex.Pattern::regExp,java.util.regex.Pattern,regExp,com/badlogic/gdx/backends/gwt/emu/java/util/regex/Pattern.java,24,-1
 z0b,,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame,,net/benmclean/fourcolorpaletteswapshader/FourColorPaletteSwapShaderGame.java,18,-1
 A0b,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame::$create(Lnet/benmclean/fourcolorpaletteswapshader/FourColorPaletteSwapShaderGame;)V,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame,$create,net/benmclean/fourcolorpaletteswapshader/FourColorPaletteSwapShaderGame.java,38,0
-B0b,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame::$render(Lnet/benmclean/fourcolorpaletteswapshader/FourColorPaletteSwapShaderGame;)V,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame,$render,net/benmclean/fourcolorpaletteswapshader/FourColorPaletteSwapShaderGame.java,108,0
-C0b,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame::$resize(Lnet/benmclean/fourcolorpaletteswapshader/FourColorPaletteSwapShaderGame;II)V,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame,$resize,net/benmclean/fourcolorpaletteswapshader/FourColorPaletteSwapShaderGame.java,149,0
+B0b,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame::$render(Lnet/benmclean/fourcolorpaletteswapshader/FourColorPaletteSwapShaderGame;)V,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame,$render,net/benmclean/fourcolorpaletteswapshader/FourColorPaletteSwapShaderGame.java,106,0
+C0b,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame::$resize(Lnet/benmclean/fourcolorpaletteswapshader/FourColorPaletteSwapShaderGame;II)V,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame,$resize,net/benmclean/fourcolorpaletteswapshader/FourColorPaletteSwapShaderGame.java,147,0
 D0b,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame::FourColorPaletteSwapShaderGame()V,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame,FourColorPaletteSwapShaderGame,net/benmclean/fourcolorpaletteswapshader/FourColorPaletteSwapShaderGame.java,18,0
 a,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame::atlas,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame,atlas,net/benmclean/fourcolorpaletteswapshader/FourColorPaletteSwapShaderGame.java,25,-1
 b,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame::batch,net.benmclean.fourcolorpaletteswapshader.FourColorPaletteSwapShaderGame,batch,net/benmclean/fourcolorpaletteswapshader/FourColorPaletteSwapShaderGame.java,31,-1
