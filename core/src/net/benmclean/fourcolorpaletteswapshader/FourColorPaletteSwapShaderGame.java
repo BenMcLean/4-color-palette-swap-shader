@@ -107,6 +107,10 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
         batch.end();
 
         batch.setShader(null);
+        batch.begin();
+        batch.draw(greyPalette.getTexture(), -16, 18);
+        batch.draw(gameboyPalette.getTexture(), 0, 18);
+        batch.end();
         frameBuffer.end();
 
         Gdx.gl.glClearColor(screenBackgroundColor.r, screenBackgroundColor.g, screenBackgroundColor.b, 1);
