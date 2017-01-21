@@ -49,10 +49,10 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
         Pixmap pixmap = new Pixmap(4, 1, Pixmap.Format.RGBA8888);
 
         greyPalette = new Palette4(
-                0, 0, 0, 0,
-                85, 85, 85, 0,
-                170, 170, 170, 0,
-                255, 255, 255, 0
+                0, 0, 0, 127,
+                85, 85, 85, 127,
+                170, 170, 170, 127,
+                255, 255, 255, 127
         );
         gameboyPalette = Palette4.gameboy();
 
