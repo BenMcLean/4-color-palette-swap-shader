@@ -67,7 +67,7 @@ public class Palette4 implements Disposable {
     protected Palette4 makePixmap() {
         if (pixmap != null) pixmap.dispose();
         pixmap = new Pixmap(4, 1, Pixmap.Format.RGBA8888);
-        pixmap.setBlending(Pixmap.Blending.None);
+        Pixmap.setBlending(Pixmap.Blending.None);
         return this;
     }
 
