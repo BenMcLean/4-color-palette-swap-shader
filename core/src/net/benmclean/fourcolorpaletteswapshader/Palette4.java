@@ -38,8 +38,7 @@ public class Palette4 implements Disposable {
             "uniform sampler2D u_texPalette;\n" +
             "uniform sampler2D u_texture;\n" +
             "void main() {\n" +
-            "   vec4 color = texture2D(u_texture, v_texCoords).rgba;\n" + // on separate line for GWT
-            "	gl_FragColor = texture2D(u_texPalette, vec2(color.r, 0)).rgba;\n" +
+            "	gl_FragColor = texture2D(u_texPalette, vec2(texture2D(u_texture, v_texCoords).r, 0)).rgba;\n" +
             "}";
 
     public static final String fragmentShaderYieldTransparency = "#ifdef GL_ES\n" +
@@ -48,16 +47,15 @@ public class Palette4 implements Disposable {
             "#else\n" +
             "#define LOWP\n" +
             "#endif\n" +
+            "varying LOWP vec4 v_color;\n" +
             "varying vec2 v_texCoords;\n" +
             "uniform sampler2D u_texPalette;\n" +
             "uniform sampler2D u_texture;\n" +
             "void main() {\n" +
-            "   vec4 color = texture2D(u_texture, v_texCoords).rgba;\n" + // on separate line for GWT
-            "	gl_FragColor = vec4(\n" +
-            "       texture2D(u_texPalette, vec2(color.r, 0)).r, \n" +
-            "       texture2D(u_texPalette, vec2(color.r, 0)).g, \n" +
-            "       texture2D(u_texPalette, vec2(color.r, 0)).b, \n" +
-            "       color.a\n" +
+            "   vec2 color = texture2D(u_texture, v_texCoords).ra;\n" + // on separate line for GWT
+            "	gl_FragColor = v_color * vec4(\n" +
+            "       texture2D(u_texPalette, vec2(color.r, 0)).rgb, \n" +
+            "       color.y\n" +
             "   );\n" +
             "}";
 
