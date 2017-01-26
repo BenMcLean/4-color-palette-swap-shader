@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
+
     public static final int VIRTUAL_WIDTH = 64;
     public static final int VIRTUAL_HEIGHT = 64;
     public int playerX = 0, playerY = 0;
@@ -24,9 +25,11 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
     private Color screenBackgroundColor;
     public TextureAtlas atlas;
     public TextureAtlas.AtlasRegion test;
-    public Texture greyPalette;
-    public Texture gameboyPalette;
+    public TextureAtlas.AtlasRegion test2;
+    public Palette4 greyPalette;
+    public Palette4 gameboyPalette;
     public ShaderProgram shader;
+    public ShaderProgram shader2;
     private FrameBuffer frameBuffer;
     private SpriteBatch batch;
     private Viewport worldView;
@@ -36,66 +39,29 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
 
     @Override
     public void create() {
-        // vertexShader copied from https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g2d/SpriteBatch.java#L132
+
         // fragmentShader is where the magic happens
-        shader = new ShaderProgram(
-                "attribute vec4 " + ShaderProgram.POSITION_ATTRIBUTE + ";\n" //
-                        + "attribute vec4 " + ShaderProgram.COLOR_ATTRIBUTE + ";\n" //
-                        + "attribute vec2 " + ShaderProgram.TEXCOORD_ATTRIBUTE + "0;\n" //
-                        + "uniform mat4 u_projTrans;\n" //
-                        + "varying vec4 v_color;\n" //
-                        + "varying vec2 v_texCoords;\n" //
-                        + "\n" //
-                        + "void main()\n" //
-                        + "{\n" //
-                        + "   v_color = " + ShaderProgram.COLOR_ATTRIBUTE + ";\n" //
-                        + "   v_color.a = v_color.a * (255.0/254.0);\n" //
-                        + "   v_texCoords = " + ShaderProgram.TEXCOORD_ATTRIBUTE + "0;\n" //
-                        + "   gl_Position =  u_projTrans * " + ShaderProgram.POSITION_ATTRIBUTE + ";\n" //
-                        + "}\n"
-                ,
-                "#ifdef GL_ES\n" +
-                        "#define LOWP lowp\n" +
-                        "precision mediump float;\n" +
-                        "#else\n" +
-                        "#define LOWP\n" +
-                        "#endif\n" +
-                        "varying vec2 v_texCoords;\n" +
-                        "uniform sampler2D u_texPalette;\n" +
-                        "uniform sampler2D u_texture;\n\n" +
-                        "void main() {\n" +
-                        "   vec4 color = texture2D(u_texture, v_texCoords).rgba;\n" + // on separate line for GWT
-                        "	gl_FragColor = texture2D(u_texPalette, vec2(color.r, 0)).rgba;\n" +
-                        "}"
-        );
+        shader = new ShaderProgram(Palette4.vertexShader, Palette4.fragmentShader);
+//        shader2 = new ShaderProgram(Palette4.vertexShader, Palette4.fragmentShaderYieldTransparency);
         if (!shader.isCompiled()) throw new GdxRuntimeException("Couldn't compile shader: " + shader.getLog());
+//        if (!shader2.isCompiled()) throw new GdxRuntimeException("Couldn't compile shader2: " + shader2.getLog());
+        shader2 = shader;
 
         Pixmap pixmap = new Pixmap(4, 1, Pixmap.Format.RGBA8888);
 
-        pixmap.setColor(0 / 255f, 0 / 255f, 0 / 255f, 255 / 255f);
-        pixmap.drawPixel(0, 0);
-        pixmap.setColor(0 / 255f, 0 / 255f, 0 / 255f, 170 / 255f);
-        pixmap.drawPixel(1, 0);
-        pixmap.setColor(0 / 255f, 0 / 255f, 0 / 255f, 85 / 255f);
-        pixmap.drawPixel(2, 0);
-        pixmap.setColor(0 / 255f, 0 / 255f, 0 / 255f, 0 / 255f);
-        pixmap.drawPixel(3, 0);
-        greyPalette = new Texture(pixmap);
-
-        pixmap.setColor(15 / 255f, 56 / 255f, 15 / 255f, 255 / 255f);
-        pixmap.drawPixel(0, 0);
-        pixmap.setColor(48 / 255f, 98 / 255f, 48 / 255f, 255 / 255f);
-        pixmap.drawPixel(1, 0);
-        pixmap.setColor(140 / 255f, 173 / 255f, 15 / 255f, 255 / 255f);
-        pixmap.drawPixel(2, 0);
-        pixmap.setColor(156 / 255f, 189 / 255f, 15 / 255f, 255 / 255f);
-        pixmap.drawPixel(3, 0);
-        gameboyPalette = new Texture(pixmap);
+        greyPalette = new Palette4(
+                0, 0, 0, 127,
+                85, 85, 85, 127,
+                170, 170, 170, 127,
+                255, 255, 255, 127
+        );
+        gameboyPalette = Palette4.gameboy();
 
         pixmap.dispose();
 
         atlas = new TextureAtlas("art.atlas");
         test = atlas.findRegion("test");
+        test2 = atlas.findRegion("test2");
 
         worldBackgroundColor = Color.PURPLE;
         screenBackgroundColor = Color.BLACK;
@@ -117,23 +83,35 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
         worldView.getCamera().position.set(playerX, playerY, 0);
         worldView.update(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
         batch.setProjectionMatrix(worldView.getCamera().combined);
-        batch.setShader(shader);
+        batch.setShader(shader2);
 
         batch.begin();
-        greyPalette.bind(1);
-        shader.setUniformi("u_texPalette", 1);
-        Gdx.gl20.glActiveTexture(GL20.GL_TEXTURE0); // reset to texture 0 for SpriteBatch
+        greyPalette.bind(batch.getShader());
         batch.draw(test, -16, 0);
         batch.end();
 
         batch.begin();
-        gameboyPalette.bind(1);
-        shader.setUniformi("u_texPalette", 1);
-        Gdx.gl20.glActiveTexture(GL20.GL_TEXTURE0); // reset to texture 0 for SpriteBatch
+        gameboyPalette.bind(batch.getShader());
         batch.draw(test, 0, 0);
         batch.end();
 
+        batch.setShader(shader2);
+
+        batch.begin();
+        greyPalette.bind(batch.getShader());
+        batch.draw(test2, -16, -16);
+        batch.end();
+
+        batch.begin();
+        gameboyPalette.bind(batch.getShader());
+        batch.draw(test2, 0, -16);
+        batch.end();
+
         batch.setShader(null);
+        batch.begin();
+        batch.draw(greyPalette.getTexture(), -16, 18);
+        batch.draw(gameboyPalette.getTexture(), 0, 18);
+        batch.end();
         frameBuffer.end();
 
         Gdx.gl.glClearColor(screenBackgroundColor.r, screenBackgroundColor.g, screenBackgroundColor.b, 1);
@@ -165,11 +143,8 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
     @Override
     public void dispose() {
         atlas.dispose();
-    }
-
-    public void applyPalette(Color[] palette) {
-        int location = shader.getUniformLocation("u_palette[0]");
-        for (int x = 0; x < palette.length; x++)
-            shader.setUniformf(location + x, palette[x]);
+        greyPalette.dispose();
+        gameboyPalette.dispose();
+        frameBuffer.dispose();
     }
 }
