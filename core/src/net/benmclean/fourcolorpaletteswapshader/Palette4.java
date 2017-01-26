@@ -34,11 +34,13 @@ public class Palette4 implements Disposable {
             "#else\n" +
             "#define LOWP\n" +
             "#endif\n" +
+            "varying LOWP vec4 v_color;\n" +
             "varying vec2 v_texCoords;\n" +
             "uniform sampler2D u_texPalette;\n" +
             "uniform sampler2D u_texture;\n" +
             "void main() {\n" +
-            "	gl_FragColor = texture2D(u_texPalette, vec2(texture2D(u_texture, v_texCoords).r, 0)).rgba;\n" +
+            "   float color = texture2D(u_texture, v_texCoords).r;\n" + // on separate line for GWT
+            "	gl_FragColor = v_color * texture2D(u_texPalette, vec2(color, 0)).rgba;\n" +
             "}";
 
     public static final String fragmentShaderYieldTransparency = "#ifdef GL_ES\n" +
