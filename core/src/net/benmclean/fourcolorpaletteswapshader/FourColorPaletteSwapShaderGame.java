@@ -39,13 +39,10 @@ public class FourColorPaletteSwapShaderGame extends ApplicationAdapter {
 
     @Override
     public void create() {
-
-        // fragmentShader is where the magic happens
         shader = new ShaderProgram(Palette4.vertexShader, Palette4.fragmentShader);
-//        shader2 = new ShaderProgram(Palette4.vertexShader, Palette4.fragmentShaderYieldTransparency);
+        shader2 = new ShaderProgram(Palette4.vertexShader, Palette4.fragmentShaderYieldTransparency);
         if (!shader.isCompiled()) throw new GdxRuntimeException("Couldn't compile shader: " + shader.getLog());
-//        if (!shader2.isCompiled()) throw new GdxRuntimeException("Couldn't compile shader2: " + shader2.getLog());
-        shader2 = shader;
+        if (!shader2.isCompiled()) throw new GdxRuntimeException("Couldn't compile shader2: " + shader2.getLog());
 
         Pixmap pixmap = new Pixmap(4, 1, Pixmap.Format.RGBA8888);
 
